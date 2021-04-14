@@ -1,4 +1,5 @@
 const initialState = ''
+let notificationTimer
 
 const notificationReducer = (state = initialState, action) => {
   console.log('action', action)
@@ -19,7 +20,8 @@ export const setNotification = (message, timeInSeconds) => {
       type: 'SET_NOTIFICATION',
       message,
     })
-    setTimeout(() => {
+    clearTimeout(notificationTimer)
+    notificationTimer = setTimeout(() => {
       dispatch(removeNotification())
     }, timeInSeconds * 1000)
   }
